@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Surface Logic Project</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<script type="text/javascript" >
+		function init() {
+			var div = document.querySelector('div');
+			var bounding = div.getBoundingClientRect();
+			document.getElementById("moving").style.left='0px';
+		document.getElementById("moving").style.top='0px';
+		document.getElementById("moving").style.right='0px';
+		document.getElementById("moving").style.bottom='0px';
+		setInterval(function() {	
+			
+			var bounding = div.getBoundingClientRect();
+			console.log(bounding);
+			if (
+				bounding.top >= 0 &&
+				bounding.left >= 0 &&
+				bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
+				bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+			) {
+				console.log('In the viewport!');
+			document.getElementById("moving").style.left = parseInt(document.getElementById("moving").style.left)+50 +'px';
+			document.getElementById("moving").style.top = parseInt(document.getElementById("moving").style.top)+50 +'px';
+			} else {
+				console.log('Not in the viewport... whomp whomp');
+				document.getElementById("moving").style.left = parseInt(document.getElementById("moving").style.left)-50 +'px';
+			document.getElementById("moving").style.top = parseInt(document.getElementById("moving").style.top)-50 +'px';
+
+			}
+
+
+	}, 1000)
+		}
+		
+		window.onload=init
+	</script>
+</head>
+<body>
+	<div id="moving" class="moving-box"></div>
+</body>
+</html>
